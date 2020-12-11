@@ -11,7 +11,22 @@
     </div>
   <% end %>
 
+
+  <div class="field">
+    <%= form.label :name %><br />
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= form.label :description %><br />
+    <%= form.text_field :description, class: "form-control" %>
+  </div>
+    <div class="field">
+    <%= form.label :date %><br />
+    <%= form.date_field :date, class: "form-control" %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>

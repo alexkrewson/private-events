@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <h1>Events</h1>
 
 <table>
@@ -10,8 +11,37 @@
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+
+
+<% @past_events = @events.select{ |n| n.past?}%>
+
+<% @future_events = @events.select{ |n| n.past? == false }%>
+
       <tr>
+        <td><strong>Previous Events:</strong></td>
+      </tr>
+
+      <% @past_events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+
+          <tr><td></td></tr>
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+
+      <tr>
+        <td><strong>Future Events:</strong></td>
+      </tr>
+
+      <% @future_events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>

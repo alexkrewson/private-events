@@ -10,6 +10,25 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @created_events = Event.where(creator_id: params[:id])
+    @attended_events = set_user.attended_events
+
+ 
+
+
+
+    # @events = Event.find_by creator_id: 2
+
+    # @events = [Event.first, Event.last]
+
+    
+    # puts "eveeeeeeeeeeeeeeeentsssssssssssss"
+    # puts "paaaaaaraaaaaaams[:id]: #{params[:id]}"
+    # puts Event.where(creator_id: params[:id])
+    # puts "eveeeeeeeeeeeeeeeentsssssssssssss"
+
+    # puts Event.last
+
   end
 
   # GET /users/new
@@ -35,6 +54,9 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+
+    session[:user_id] = @user.id
+
   end
 
   # PATCH/PUT /users/1
@@ -54,6 +76,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    puts "wubbbalubbadubbdubb"
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
@@ -69,6 +92,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.fetch(:user, {})
+      params.require(:user).permit(:username)
     end
+  
 end

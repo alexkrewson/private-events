@@ -1,5 +1,16 @@
 class Event < ApplicationRecord
 
-    has_and_belongs_to_many :users
+
+    belongs_to :creator, class_name: "User"
+
+
+    has_many :event_attendings, foreign_key: :attended_event_id
+
+    has_many :attendees, through: :event_attendings
+
+
+    def past?
+        self.date < Time.now
+    end
 
 end

@@ -1,0 +1,21 @@
+
+
+<form action="/sessions" method="post">
+
+    "hey there"
+    <label for="username">username:</label>
+    <input id="username" name="username" type="text">
+    <br><br>
+
+    <%# <label for="user[email]">email:</label>
+    <input id="user[email]" name="user[email]" type="text">
+    <br><br>
+
+    <label for="user[password]">password:</label>
+    <input id="user[password]" name="user[password]" type="text">
+    <br><br> %>
+
+    <input type="submit" value="Submit">
+
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+</form> 

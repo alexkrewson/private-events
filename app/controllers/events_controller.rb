@@ -5,11 +5,27 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+
+    puts "eveeeeeeeeeeeeeeeeeeeeeeeeeeeeents"
+    
+    puts @events.count
+
+    puts "eveeeeeeeeeeeeeeeeeeeeeeeeeeeeents"
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+
+    @event = set_event
+    @user = User.find(@event.creator_id)
+
+    @attendees = @event.attendees
+
+    
+
+
+   
   end
 
   # GET /events/new
@@ -25,6 +41,11 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+
+
+    @event.creator_id = session[:user_id]
+
+    # @event.creator = User.find(session[:user_id])
 
     respond_to do |format|
       if @event.save
@@ -69,6 +90,8 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.fetch(:event, {})
+      params.require(:event).permit(:name, :description, :date)
     end
+
+    
 end
